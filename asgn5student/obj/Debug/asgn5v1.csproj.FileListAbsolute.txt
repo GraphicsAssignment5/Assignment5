@@ -1,0 +1,8 @@
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\obj\Debug\asgn5v1.exe
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\obj\Debug\asgn5v1.pdb
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\bin\Debug\asgn5v1.exe
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\bin\Debug\asgn5v1.pdb
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\obj\Debug\asgn5v1.AboutDialogBox.resources
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\obj\Debug\asgn5v1.Transformer.resources
+C:\Documents and Settings\00729757\Desktop\COMP4560\Comp4560200810\asgn5student\obj\Debug\asgn5v1.csproj.GenerateResource.Cache
