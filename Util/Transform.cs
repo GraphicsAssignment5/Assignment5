@@ -88,6 +88,52 @@ namespace asgn5v1.Util
             return this;
         }
 
+        public TransformBuilder Shear(Direction direction)
+        {
+            double[,] A = SetIdentity(4, 4);
+            if (direction == Direction.LEFT)
+                A[1, 0] = 0.1d;
+            else if (direction == Direction.RIGHT)
+                A[1, 0] = -0.1d;
+
+            this.tnet = this.MultiplyMatrix(this.tnet, A);
+
+            return this;
+        }
+
+        public TransformBuilder RotateIn(Axis axis)
+        {
+            double cos = Math.Cos(0.05);
+            double sin = Math.Sin(0.05);
+            double[,] matrix = SetIdentity(4, 4);
+
+            switch (axis)
+            {
+                case Axis.X:
+                    matrix[1, 1] = cos;
+                    matrix[1, 2] = sin;
+                    matrix[2, 1] = -sin;
+                    matrix[2, 2] = cos;
+                    break;
+                case Axis.Y:
+                    matrix[0, 0] = cos;
+                    matrix[0, 2] = -sin;
+                    matrix[2, 0] = sin;
+                    matrix[2, 2] = cos;
+                    break;
+                case Axis.Z:
+                    matrix[0, 0] = cos;
+                    matrix[0, 1] = sin;
+                    matrix[1, 0] = -sin;
+                    matrix[1, 1] = cos;
+                    break;
+            }
+
+            this.tnet = this.MultiplyMatrix(this.tnet, matrix);
+
+            return this;
+        }
+
         public double[,] SetIdentity(int nrow, int ncol)
         {
             double[,] A = new double[nrow,ncol];

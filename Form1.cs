@@ -23,7 +23,8 @@ namespace asgn5v1
 
 		int numpts = 0;
 		int numlines = 0;
-		bool gooddata = false;		
+		bool gooddata = false;
+        bool rotating = false;
 		double[,] vertices;
 		double[,] scrnpts;
 		double[,] ctrans = new double[4,4];  //your main transformation matrix
@@ -65,7 +66,7 @@ namespace asgn5v1
 			this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 			this.SetStyle(ControlStyles.UserPaint, true);
 			this.SetStyle(ControlStyles.DoubleBuffer, true);
-			Text = "COMP 4560:  Assignment 5 (200830) (Your Name Here)";
+			Text = "COMP 4560:  Assignment 5 (Niko Arellano and Bryn Beaudry)";
 			ResizeRedraw = true;
 			BackColor = Color.Black;
 			MenuItem miNewDat = new MenuItem("New &Data...",
@@ -595,68 +596,143 @@ namespace asgn5v1
 		{
 			if (e.Button == transleftbtn)
 			{
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-75, 0, 0).GetTransNet();
 				Refresh();
 			}
 			if (e.Button == transrightbtn) 
 			{
-				Refresh();
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(75, 0, 0).GetTransNet();
+                Refresh();
 			}
 			if (e.Button == transupbtn)
 			{
-				Refresh();
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(0, -35, 0).GetTransNet();
+                Refresh();
 			}
 			
 			if(e.Button == transdownbtn)
 			{
-				Refresh();
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(0, 35, 0).GetTransNet();
+                Refresh();
 			}
 			if (e.Button == scaleupbtn) 
 			{
-				Refresh();
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                               .Scale(1.1)
+                                                               .Translate(scrnpts[0,0], scrnpts[0, 1], scrnpts[0, 2])
+                                                               .GetTransNet();
+                Refresh();
 			}
 			if (e.Button == scaledownbtn) 
 			{
-				Refresh();
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                               .Scale(0.9)
+                                                               .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                               .GetTransNet();
+                Refresh();
 			}
 			if (e.Button == rotxby1btn) 
 			{
-				
-			}
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                              .RotateIn(Axis.X)
+                                                              .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+                Refresh();
+            }
 			if (e.Button == rotyby1btn) 
 			{
-				
-			}
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                              .RotateIn(Axis.Y)
+                                                              .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+                Refresh();
+            }
 			if (e.Button == rotzby1btn) 
 			{
-				
-			}
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                              .RotateIn(Axis.Z)
+                                                              .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+                Refresh();
+            }
 
 			if (e.Button == rotxbtn) 
 			{
-				
-			}
+                rotating = true;
+                while (rotating)
+                {
+                    this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                              .RotateIn(Axis.X)
+                                                              .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+                    Refresh();
+                    System.Threading.Thread.Sleep(100);
+                    Application.DoEvents();
+                }
+            }
 			if (e.Button == rotybtn) 
 			{
-				
-			}
+                rotating = true;
+                while (rotating)
+                {
+                    this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                              .RotateIn(Axis.Y)
+                                                              .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+                    Refresh();
+                    System.Threading.Thread.Sleep(100);
+                    Application.DoEvents();
+                }
+            }
 			
 			if (e.Button == rotzbtn) 
 			{
-				
-			}
+                rotating = true;
+                while (rotating)
+                {
+                    this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                              .RotateIn(Axis.Z)
+                                                              .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+                    Refresh();
+                    System.Threading.Thread.Sleep(100);
+                    Application.DoEvents();
+                }
+            }
 
 			if(e.Button == shearleftbtn)
 			{
-				Refresh();
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[0, 0], -scrnpts[0, 1], -scrnpts[0, 2])
+                                                              .Shear(Direction.LEFT)
+                                                              .Translate(scrnpts[0, 0], scrnpts[0, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+
+                Refresh();
 			}
 
 			if (e.Button == shearrightbtn) 
 			{
-				Refresh();
+                rotating = false;
+                this.ctrans = new TransformBuilder(this.ctrans).Translate(-scrnpts[16, 0], -scrnpts[16, 1], -scrnpts[0, 2])
+                                                              .Shear(Direction.RIGHT)
+                                                              .Translate(scrnpts[16, 0], scrnpts[16, 1], scrnpts[0, 2])
+                                                              .GetTransNet();
+                Refresh();
 			}
 
 			if (e.Button == resetbtn)
 			{
+                rotating = false;
 				RestoreInitialImage();
 			}
 
